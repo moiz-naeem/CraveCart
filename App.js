@@ -1,14 +1,44 @@
 import React from "react";
 import ReactDOM from "react-dom/client"
 import logo from "./Logo.jpeg"
-import { imageLink } from "./RestarauntData";
-import { restaurants } from "./RestarauntData";
+import {restaurants} from "./RestarauntData";
+import { RestaurantCard } from "./RestaurantCard";
+import { useState } from "react";
 
-const Navbar = () => {
+
+const filterData = (searchText, restaurants) => {
+        return (
+           restaurants.filter((restaurant) =>{
+            return restaurant.info.name.toLowerCase().includes(searchText.toLowerCase());
+})
+        )
+}
+
+
+const Navbar = ({setFilteredRestaurants}) => {
+    const [searchText, setSearchText] = useState("");
+    // const [filteredRestraunts, setFilteredRestraunts] = useState(restaurants);
+    const handleSearch = () =>{
+        const filtered = filterData(searchText, restaurants)
+        setFilteredRestaurants(filtered)
+        // {console.log(filteredRestraunts)};
+        
+        
+    }
     return (
     <div className="navbar">
         <img className="logo" src={logo} alt="CraveCart logo"/>
+        <div className="search-input">
+            <input 
+            className="search-input"
+            placeholder="Search"
+            value={searchText} 
+            onChange={(e) => setSearchText(e.target.value)}/>
+            <button className="search-button" onClick={handleSearch}>Search </button>
+        </div>
+        
         <ul className="navItems"> 
+            
             <li>Home</li>
             <li>About</li>
             <li>Cart</li>
@@ -18,35 +48,10 @@ const Navbar = () => {
 )
 }
 
-const RestaurantCard = ({
-    cloudinaryImageId,
-    name,
-    cuisines,
-    area,
-    totalRatingsString,
-    avgRating,
-}) => {
-    return(
-        <div className="restaurant-card">
-            {console.log(name)}
-            <img src={imageLink + cloudinaryImageId}/>
-            <h4> {name}</h4>
-            <h4> {cuisines.join(", ")}</h4>
-            <h4> {area} </h4>
-            <span>
-              <h4>
-               <i class="fa-solid fa-star"></i>
-               {avgRating + "⭐ ("+ totalRatingsString + ")"}
-              </h4>
-            </span>
-        </div>
-    )
-
-}
-
-const Body = () => {
+const Body = ({restaurants}) => {
     return (     
         <div className="restaurants">
+            
             {restaurants.map(restaurant => {
               return (<RestaurantCard key={restaurant.info.id} {...restaurant.info}/>
             )})}
@@ -56,20 +61,24 @@ const Body = () => {
     );
 }
 
+
+
 const Footer = () => {
     return(
         <h4>Footer</h4>
     )
 }
-const Page = () =>{
+const App = () =>{
+    const [filteredRestaurants, setFilteredRestaurants] = useState(restaurants);
+
     return(
         <>
-          <Navbar/>
-          <Body/>
+          <Navbar setFilteredRestaurants={setFilteredRestaurants}/>
+          <Body restaurants={filteredRestaurants}/>
           <Footer/>
         </>
     )
 }
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
-root.render(<Page/>)
+root.render(<App/>)
