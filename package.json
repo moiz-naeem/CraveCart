@@ -1,0 +1,32 @@
+{
+  "name": "cravecart",
+  "version": "1.0.0",
+  "description": "a food ordering app",
+  "scripts": {
+    "test": "start",
+    "start": "parcel index.html"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/moiz-naeem/CraveCart.git"
+  },
+  "keywords": [
+    "jest"
+  ],
+  "author": "Moiz Naeem",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/moiz-naeem/CraveCart/issues"
+  },
+  "homepage": "https://github.com/moiz-naeem/CraveCart#readme",
+  "devDependencies": {
+    "parcel": "^2.12.0"
+  },
+  "dependencies": {
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1"
+  },
+  "browsersList":[
+    "last 2 versions"
+  ]
+}
