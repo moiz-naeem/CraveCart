@@ -1,29 +1,25 @@
 import React from "react";
 import ReactDOM from "react-dom/client"
 import logo from "./Logo.jpeg"
-import {restaurants} from "./RestarauntData";
+import { restaurants as rData } from "./RestarauntData";
 import { RestaurantCard } from "./RestaurantCard";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import axios from "axios";
+import { API } from "./RestrauntDataApi";
 
 
-const filterData = (searchText, restaurants) => {
+const filterData = (searchText, restaurants ) => {
         return (
-           restaurants.filter((restaurant) =>{
-            return restaurant.info.name.toLowerCase().includes(searchText.toLowerCase());
-})
-        )
+            restaurants.filter((restaurant) =>
+                restaurant.info.name.toLowerCase().includes(searchText.toLowerCase()))
+    )
 }
 
 
-const Navbar = ({setFilteredRestaurants}) => {
+const Navbar = ({setFilteredRestaurants, restaurants}) => {
     const [searchText, setSearchText] = useState("");
-    // const [filteredRestraunts, setFilteredRestraunts] = useState(restaurants);
     const handleSearch = () =>{
-        const filtered = filterData(searchText, restaurants)
-        setFilteredRestaurants(filtered)
-        // {console.log(filteredRestraunts)};
-        
-        
+        setFilteredRestaurants(filterData(searchText, restaurants));      
     }
     return (
     <div className="navbar">
@@ -48,13 +44,13 @@ const Navbar = ({setFilteredRestaurants}) => {
 )
 }
 
-const Body = ({restaurants}) => {
+const Body = ({filteredRestaurants}) => {
     return (     
         <div className="restaurants">
             
-            {restaurants.map(restaurant => {
-              return (<RestaurantCard key={restaurant.info.id} {...restaurant.info}/>
-            )})}
+            {filteredRestaurants.map(restaurant => 
+                (<RestaurantCard key={restaurant?.info?.id} {...restaurant.info}/>
+            ))}
         </div>  
             
                 
@@ -69,12 +65,26 @@ const Footer = () => {
     )
 }
 const App = () =>{
-    const [filteredRestaurants, setFilteredRestaurants] = useState(restaurants);
+    const [restaurants, setRestaurants] = useState([rData]);
+    const [filteredRestaurants, setFilteredRestaurants] = useState([rData]);
+
+    useEffect(()=>{
+        const fetchData = async()=>{
+            const response = await axios.get(API);
+            const data = await response.data;
+            const restaurantList = data?.data?.cards[1]?.card?.card?.gridElements?.infoWithStyle?.restaurants;
+            setFilteredRestaurants(restaurantList)
+            setRestaurants(restaurantList);
+        }
+        fetchData();
+
+}, [])
 
     return(
         <>
-          <Navbar setFilteredRestaurants={setFilteredRestaurants}/>
-          <Body restaurants={filteredRestaurants}/>
+
+          <Navbar setFilteredRestaurants={setFilteredRestaurants} restaurants={restaurants} />
+          <Body filteredRestaurants={filteredRestaurants}/>
           <Footer/>
         </>
     )
