@@ -54,11 +54,11 @@
     justify-content:center;
 }
 .restaurant-card{
-    width: 200px;
+    width: 180px;
     border-radius: 5px;
     box-shadow: -1px 4px 20px 14px rgba(0, 0, 0, 0.2);
-    padding: 10px;
-    margin: 20px;
+    padding: 8px;
+    margin: 15px;
     cursor: pointer;
 }
 .restaurant-card > img{
