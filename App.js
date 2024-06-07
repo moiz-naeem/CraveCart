@@ -1,11 +1,12 @@
 import React from "react";
 import ReactDOM from "react-dom/client"
 import logo from "./Logo.jpeg"
-import { restaurants as rData } from "./RestarauntData";
 import { RestaurantCard } from "./RestaurantCard";
 import { useState, useEffect } from "react";
 import axios from "axios";
 import { API } from "./RestrauntDataApi";
+import ShimmerUI from "./ShimmerUI";
+import NotFound from "./NotFound";
 
 
 const filterData = (searchText, restaurants ) => {
@@ -44,15 +45,17 @@ const Navbar = ({setFilteredRestaurants, restaurants}) => {
 )
 }
 
-const Body = ({filteredRestaurants}) => {
-    return (     
+const Body = ({filteredRestaurants, restaurants}) => {
+
+    return  (!restaurants.length
+    ) ? (<ShimmerUI/>) : (           
         <div className="restaurants">
             
-            {filteredRestaurants.map(restaurant => 
+            {!filteredRestaurants.length ? (<NotFound/>) : (filteredRestaurants.map(restaurant => 
                 (<RestaurantCard key={restaurant?.info?.id} {...restaurant.info}/>
-            ))}
+            )))}
+
         </div>  
-            
                 
     );
 }
@@ -65,8 +68,8 @@ const Footer = () => {
     )
 }
 const App = () =>{
-    const [restaurants, setRestaurants] = useState([rData]);
-    const [filteredRestaurants, setFilteredRestaurants] = useState([rData]);
+    const [restaurants, setRestaurants] = useState([]);
+    const [filteredRestaurants, setFilteredRestaurants] = useState([]);
 
     useEffect(()=>{
         const fetchData = async()=>{
@@ -80,11 +83,11 @@ const App = () =>{
 
 }, [])
 
-    return(
+    return (
         <>
 
           <Navbar setFilteredRestaurants={setFilteredRestaurants} restaurants={restaurants} />
-          <Body filteredRestaurants={filteredRestaurants}/>
+          <Body filteredRestaurants={filteredRestaurants} restaurants={restaurants} />
           <Footer/>
         </>
     )
