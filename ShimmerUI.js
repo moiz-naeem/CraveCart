@@ -4,7 +4,7 @@ const ShimmerUI = () =>{
       { (Array.from({length: 12}).fill(1)).map((card, index) => {
        return  (
         
-            <div className="restaurant-card" id="shimmer-card">
+            <div className="restaurant-card">
               <img></img>
               <h5></h5>
               <h5></h5>
