@@ -12,7 +12,7 @@ const MenuCard = ({
        <div className="restaurant-card" id="menu-card">
         <img src={imageLink + imageId}/>
         <h5>{name}</h5>
-        <h5>{price}</h5>
+        <h5>{((parseInt(price))/100) +"₹"}</h5>
         <p>{description}</p>
        </div>
     )

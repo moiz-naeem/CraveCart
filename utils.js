@@ -2,21 +2,14 @@ import { restarauntAPI } from "./Constants";
 import axios from "axios";
 import { getAPIwithCoordinates } from "./Constants";
 
-export const fetchData = async({setRestaurants ,setFilteredRestaurants, coordinates})=>{
+export const fetchData = async(setRestaurants ,setFilteredRestaurants, coordinates)=>{
     try{
-        console.log("utils fetchData") 
-        console.log(coordinates)
-        //coordinates are undefined here
-
         if(!coordinates){
             return console.log("Not Set") ;
         } 
         const [lat, lng] = coordinates;
-        console.log(lat);
-        console.log(lng);
-
         const API = getAPIwithCoordinates(lat, lng)
-        console.log(API);
+        // console.log(API);
         // const response = await axios.get(restarauntAPI);
         const response = await axios.get(API);
         const data = await response.data;
@@ -31,7 +24,17 @@ export const fetchData = async({setRestaurants ,setFilteredRestaurants, coordina
 
 
 
-export const filterData = (searchText, restaurants ) => {
+export const filterRestaurantData = (searchText, restaurants) => {
     return (
-        restaurants.filter((restaurant) =>
+        restaurants.filter(restaurant =>
             restaurant.info.name.toLowerCase().includes(searchText.toLowerCase())))}
+
+export const filterMenuData = (searchText, menuItems) => {
+    {console.log("searching")}
+    return (
+        
+        menuItems.filter( menu => 
+            menu.name.toLowerCase().includes(searchText.toLowerCase())
+        )
+    )
+}
