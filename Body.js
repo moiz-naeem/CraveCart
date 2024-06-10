@@ -25,7 +25,7 @@ const Body = () => {
 
     return (
         <>
-          <CitiesDropdown setCoordinates={setCoordinates} />
+          <CitiesDropdown setCoordinates={setCoordinates} coordinates={coordinates}  />
           {coordinates ? (
             <>
               <RestaurantSearch

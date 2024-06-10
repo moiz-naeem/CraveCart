@@ -4,9 +4,17 @@ import { getAPIwithCoordinates } from "./Constants";
 
 export const fetchData = async({setRestaurants ,setFilteredRestaurants, coordinates})=>{
     try{
-        if(!coordinates) return console.log("Not Set") ;
+        console.log("utils fetchData") 
+        console.log(coordinates)
+        //coordinates are undefined here
+
+        if(!coordinates){
+            return console.log("Not Set") ;
+        } 
         const [lat, lng] = coordinates;
-        console.log(lat+lng +"h=ello")
+        console.log(lat);
+        console.log(lng);
+
         const API = getAPIwithCoordinates(lat, lng)
         console.log(API);
         // const response = await axios.get(restarauntAPI);
