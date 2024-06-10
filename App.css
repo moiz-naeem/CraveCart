@@ -84,3 +84,8 @@
     padding: 0 5px 3px 0;
 }
 
+.log-sign{
+    display: flex;
+    justify-content: center;
+    padding: 30px;
+}

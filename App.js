@@ -8,6 +8,7 @@ import NotFound from "./NotFound";
 import About from "./About";
 import Cart from './Cart'
 import Menu from "./Menu";
+import Register from "./Register";
 
 const App = () =>{
    
@@ -42,6 +43,10 @@ const appRoute =  createBrowserRouter([
             {
             path: "/restaurant/:restaurantID",
             element: <Menu/>
+            },
+            {
+                path: "/register",
+                element: <Register/>
             }
 
         ]
