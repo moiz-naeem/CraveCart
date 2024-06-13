@@ -4,7 +4,7 @@ import { RestaurantCard } from "./RestaurantCard";
 import { useState, useEffect } from "react";
 import CitiesDropdown from "./CitiesDropdown";
 import { fetchData, handleSearch} from "./utils";
-import RestaurantSearch from "./RestaurantSearch";
+import Search from "./Search";
 
 
 
@@ -19,26 +19,29 @@ const Body = () => {
 
     
     useEffect(()=>{
-       if (coordinates){ fetchData(setRestaurants, setFilteredRestaurants, coordinates)};
+       if (coordinates){
+         fetchData(setRestaurants, setFilteredRestaurants, coordinates)};
 }, [coordinates])
   
 
     return (
         <>
-          <CitiesDropdown setCoordinates={setCoordinates} coordinates={coordinates}  />
+          <CitiesDropdown setCoordinates={setCoordinates}  />
+          <Search
+                setFiltered={setFilteredRestaurants}
+                raw={restaurants}
+                type={"restaurants"}
+              />
           {coordinates ? (
             <>
-              <RestaurantSearch
-                setFilteredRestaurants={setFilteredRestaurants}
-                restaurants={restaurants}
-              />
+              
               <div className="restaurants">
                 {filteredRestaurants.length ? (
                   filteredRestaurants.map((restaurant) => (
                     <RestaurantCard key={restaurant?.info?.id} {...restaurant?.info} />
                   ))
                 ) : (
-                  <NotFound />
+                  <ShimmerUI />
                 )}
               </div>
             </>
