@@ -8,13 +8,13 @@ const Search = ({setFiltered, raw, type}) => {
      }
 
     return (
-        <div className="search-input">
+        <div className="px-4 py-4 m-3 ">
         <input 
-          className="search-input"
+          className="rounded-md mr-4 p-1 "
           placeholder="Search"
           value={searchText} 
           onChange={(e) => setSearchText(e.target.value)}/>
-        <button className="search-button" onClick={handleSearch}>Search </button>
+        <button className="search-button bg-black hover:bg-white hover:text-black p-1 rounded-md text-white" onClick={handleSearch}>Search </button>
     </div> 
     )
 }

@@ -12,20 +12,27 @@ export const RestaurantCard = ({
     
 }) => {
     return(
-        <div className="restaurant-card">
-            
-            <img src={imageLink + cloudinaryImageId}/>
+        <div className="w-44 p-2 m-6 rounded-md bg-slate-50 text-center shadow-md cursor-pointer">
+            <img  className="h-52 w-44 rounded-md" src={imageLink + cloudinaryImageId}/>
             <Link to={"/restaurant/" + id }> 
-            <h5> {name}</h5>
-            <h5> {cuisines.join(',  ')} </h5>
-            <h5> {locality} </h5>
+            <div className="mt-4">
+               <h5 className="font-bold"> {name}</h5>
+               <div className="mt-3">
+               <h5> {cuisines.join(',  ')} </h5>
+               <h5> {locality} </h5>
+               
+               <span>
+                  <h5>
+                    <i class="fa-solid fa-star"></i>
+                     {avgRating + "⭐ ("+ totalRatingsString + ")"}
+                  </h5>
+                </span>
+                
+               </div>
+               
+            </div>
             </Link>
-            <span>
-              <h5>
-               <i class="fa-solid fa-star"></i>
-               {avgRating + "⭐ ("+ totalRatingsString + ")"}
-              </h5>
-            </span>
+            
             
         </div>
     )
