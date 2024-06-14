@@ -5,10 +5,12 @@ import Search from "./Search"
 import axios from "axios"
 import MenuCard from "./MenuCard"
 import NotFound from "./NotFound"
+import ShimmerUI from "./ShimmerUI"
 const Menu = () => {
     const {restaurantID} = useParams();
     const [menuItems, setmenuItems] = useState([]);
     const [filteredMenuItem, setFilteredMenuItem ] = useState([]);
+    const [isLoading, setLoading] = useState(true);
     useEffect(() => {
         const fetchMenuData = async(restaurantID) => {
         try{
@@ -27,25 +29,30 @@ const Menu = () => {
             setFilteredMenuItem(uniqueMenu);
         }catch(error){
             console.error(error)
-        } 
+        }finally{
+            setLoading(false);
+        }
                 
             };
             
         fetchMenuData(restaurantID);
     }, [])
     
-    return (
+ return (
         <>
+          <div className="flex justify-center bg-orange-500 rounded-sm shadow-md">
           <Search setFiltered={setFilteredMenuItem} raw={menuItems} type={"menu"}/>
-          <div className="restaurants">
-            {filteredMenuItem.length ? 
-               (filteredMenuItem.map((menu) => {
-                return (            
-                    <MenuCard key={menu.id} menu = {menu} />
-                          
-            )
-            })) : <NotFound/>}
-        </div>
+          </div>
+          <div className="flex flex-wrap justify-center ">
+            {isLoading ? <ShimmerUI/> : (
+                filteredMenuItem.length ? (filteredMenuItem.map((menu) => {
+                    return (
+                        <MenuCard key={menu.id} menu = {menu} />
+                    )
+                })) : <NotFound/>
+
+            )}
+          </div>
         </>
         
 
