@@ -14,6 +14,7 @@ const Menu = () => {
     useEffect(() => {
         const fetchMenuData = async(restaurantID) => {
         try{
+            setLoading(true);
             const response = await axios.get(menuApi + restaurantID);
             const data = await response.data;
             const menu = (data?.data?.cards.find(x=> x.groupedCard)?.
@@ -25,12 +26,11 @@ const Menu = () => {
                  newMenu.some(x => x.id === item.id) ? null : newMenu.push(item);
                  return newMenu 
             }, [])
+            setLoading(false);
             setmenuItems(uniqueMenu);
             setFilteredMenuItem(uniqueMenu);
         }catch(error){
             console.error(error)
-        }finally{
-            setLoading(false);
         }
                 
             };

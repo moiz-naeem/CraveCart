@@ -4,20 +4,18 @@ import { getAPIwithCoordinates } from "./Constants";
 
 export const fetchData = async(setRestaurants ,setFilteredRestaurants, coordinates,setLoading)=>{
     try{
-        if(!coordinates){
-            return console.log("Not Set") ;
-        } 
+        
+        setLoading(true); 
         const [lat, lng] = coordinates;
         const API = getAPIwithCoordinates(lat, lng)
         const response = await axios.get(API);
         const data = await response.data;
         const restaurantList = data?.data?.cards[1]?.card?.card?.gridElements?.infoWithStyle?.restaurants;
+        setLoading(false)
         setFilteredRestaurants(restaurantList)
         setRestaurants(restaurantList);
     }catch(error){
         console.error(error);
-    }finally{
-        setLoading(false)
     }
     
 }
