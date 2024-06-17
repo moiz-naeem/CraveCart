@@ -8,15 +8,22 @@ import NotFound from "./NotFound";
 import About from "./About";
 import Cart from './Cart'
 import Menu from "./Menu";
+import {MenuProvider}from "./MenuContext";
+import { RestaurantProvider } from "./RestaurantContext";
 import Register from "./Register";
+
 
 const App = () =>{
    
 
     return (
         <>
-          <Navbar  />
-          <Outlet/>
+          <RestaurantProvider>
+            <MenuProvider>
+             <Navbar  />
+             <Outlet/>  
+            </MenuProvider> 
+          </RestaurantProvider> 
           <Footer/>
         </>
     )
