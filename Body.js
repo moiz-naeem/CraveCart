@@ -1,37 +1,23 @@
 import ShimmerUI from "./ShimmerUI";
 import NotFound from "./NotFound";
 import { RestaurantCard } from "./RestaurantCard";
-import { useState, useEffect } from "react";
 import CitiesDropdown from "./CitiesDropdown";
-import { fetchData, handleSearch} from "./utils";
 import Search from "./Search";
-
-
-
-
+import { useContext } from "react";
+import RestaurantContext from "./RestaurantContext";
 
 const Body = () => {
-
-    const [restaurants, setRestaurants] = useState([]);
-    const [filteredRestaurants, setFilteredRestaurants] = useState([]);
-    const [coordinates, setCoordinates] = useState(null);
-    const [isLoading, setLoading] = useState(true);
-
-
-    
-    useEffect(()=>{
-       if (coordinates){
-         fetchData(setRestaurants, setFilteredRestaurants, coordinates, setLoading)
-        };
-}, [coordinates])
-  
+    const {
+      restaurants,
+      setCoordinates,
+      coordinates,
+      setFilteredRestaurants,
+      filteredRestaurants,
+      isLoading
+     } = useContext(RestaurantContext); 
 
     return (
       <div>
-        <div className="bg-orange-500 flex justify-center rounded-sm shadow-lg p-4">
-          <CitiesDropdown setCoordinates={setCoordinates} />
-          <Search setFiltered={setFilteredRestaurants} raw={restaurants} type="restaurants" />
-        </div>
 
         {isLoading ? (
           <ShimmerUI />
