@@ -13,8 +13,8 @@ export const RestaurantCard = ({
 }) => {
     return(
         <div className="w-44 p-2 m-6 rounded-md bg-slate-50 text-center shadow-md cursor-pointer">
-            <img  className="h-52 w-44 rounded-md" src={imageLink + cloudinaryImageId}/>
             <Link to={"/restaurant/" + id }> 
+            <img  className="h-52 w-44 rounded-md" src={imageLink + cloudinaryImageId}/>            
             <div className="mt-4">
                <h5 className="font-bold"> {name}</h5>
                <div className="mt-3">
