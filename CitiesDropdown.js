@@ -1,8 +1,10 @@
 import cities from "./Cities"
-import { useState, useEffect } from "react"
+import { useState, useEffect , useContext} from "react"
+import RestaurantContext from "./RestaurantContext"
 
-const CitiesDropdown = ({setCoordinates}) =>{
+const CitiesDropdown = () =>{
     const [selectedCity, setselectedCity] = useState("")
+    const {setCoordinates} = useContext(RestaurantContext);
 
     const handleChange = (event) =>{
             setselectedCity(event.target.value);
