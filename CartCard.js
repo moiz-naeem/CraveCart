@@ -1,13 +1,15 @@
 import { useDispatch } from "react-redux";
 import { imageLink } from "./Constants";
 import { removeItem} from "./cartSlice";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 const CartCard = ({item}) => {
     const { name = "No Restaurant", imageId = "490629b70f89da8a5b93fc199ece335e", price = "0" } = item
+    const cartItems = useSelector(store => store.cart.items)
     const dispatch = useDispatch() 
-    const removeFromCart = () =>{
-       dispatch(removeItem(item))
+    const removeFromCart = (id) =>{
+       const index = cartItems.findIndex(item => item.id === id)
+       dispatch(removeItem(index))
     }
    
     return (
@@ -20,7 +22,7 @@ const CartCard = ({item}) => {
                   <h5> {((parseInt(price))/100) +"₹"}</h5>
                </div>
                <button className="bg-red-100 rounded-md p-1 m-1 px-3 text-sm font-bold"
-               onClick={removeFromCart}
+               onClick={() => removeFromCart(item.id)}
                >Remove</button>   
             </div>     
         </div>

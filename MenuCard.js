@@ -2,11 +2,11 @@ import { useDispatch } from "react-redux";
 import { imageLink } from "./Constants";
 import { addItem } from "./cartSlice";
 import { useDispatch } from "react-redux";
-const MenuCard = ({menu}) => {
-    const { name = "No Restaurant", imageId = "490629b70f89da8a5b93fc199ece335e", price = "0" } = menu;
+const MenuCard = ({menuItem}) => {
+    const { name = "No Restaurant", imageId = "490629b70f89da8a5b93fc199ece335e", price = "0" } = menuItem;
     const dispatch = useDispatch() 
     const handleAddIteam = () =>{
-       dispatch(addItem(menu))
+       dispatch(addItem(menuItem))
     }
     return (
         <div className="w-44 p-2 m-6 rounded-md bg-slate-50 text-center shadow-md cursor-pointer">
