@@ -11,13 +11,14 @@ import Menu from "./Menu";
 import {MenuProvider}from "./MenuContext";
 import { RestaurantProvider } from "./RestaurantContext";
 import Register from "./Register";
-
+import { Provider } from "react-redux";
+import store from "./store";
 
 const App = () =>{
    
 
     return (
-        <>
+        <Provider store={store}>
           <RestaurantProvider>
             <MenuProvider>
              <Navbar  />
@@ -25,7 +26,7 @@ const App = () =>{
             </MenuProvider> 
           </RestaurantProvider> 
           <Footer/>
-        </>
+        </Provider>
     )
 }
 

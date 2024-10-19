@@ -8,12 +8,12 @@ import RestaurantContext from "./RestaurantContext";
 
 const Body = () => {
     const {
-      restaurants,
+      restaurants =[],
       setCoordinates,
-      coordinates,
+      coordinates = {lat:0, lng:0},
       setFilteredRestaurants,
-      filteredRestaurants,
-      isLoading
+      filteredRestaurants=[],
+      isLoading = false
      } = useContext(RestaurantContext); 
 
     return (

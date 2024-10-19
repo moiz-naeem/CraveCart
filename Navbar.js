@@ -5,10 +5,12 @@ import RestaurantContext from "./RestaurantContext";
 import MenuContext from "./MenuContext";
 import Search from "./Search";
 import CitiesDropdown from "./CitiesDropdown";
+import { useSelector } from "react-redux";
 
 
 
 const Navbar = () => {
+    const cartItems = useSelector(store => store.cart.items)
     const [isLoggedIn , setIsLoggedIn] = useState(false)
     const{
         setFilteredMenuItem,
@@ -46,7 +48,8 @@ return (
         
         <li className="px-6 py-7"><Link to={"/"}> Home </Link></li>
         <li className="px-6 py-7"><Link to={"/about"}> About</Link></li>
-        <li className="px-6 py-7"><Link to={"/cart"}> Cart </Link></li>
+        {cartItems.length == 0 ? (<li className="px-6 py-7"><Link to={"/cart"}> Cart</Link></li>)
+        : (<li className=" h-8 w-12 mt-7 pl-2 pt-1 bg-green-400 text-white rounded-md "><Link to={"/cart"}> Cart</Link></li>)}
     </ul>
     <div className="px-10 py-9 justify-self-center mt-3">
          {isLoggedIn ?  

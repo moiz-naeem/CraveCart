@@ -19,9 +19,9 @@ const Menu = () => {
          
           <div className="flex flex-wrap justify-center ">
             {isLoading ? <ShimmerUI/> : (
-                filteredMenuItem.length ? (filteredMenuItem.map((menu) => {
+                filteredMenuItem.length ? (filteredMenuItem.map((menuItem) => {
                     return (
-                        <MenuCard key={menu.id} menu = {menu} />
+                        <MenuCard key={menuItem.id} menuItem = {menuItem} />
                     )
                 })) : <NotFound/>
 
