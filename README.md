@@ -29,12 +29,17 @@ CraveCart is a food ordering application and my first project built with React. 
    ```bash
    git clone https://github.com/moiz-naeem/CraveCart.git
    cd cravecart
+   ```
 
 ### Install Dependencies:
 ```bash
 npm install
+```
+
+### Start the project:
 
 ```bash
 npm start
+```
 
 
