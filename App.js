@@ -1,18 +1,18 @@
 import React from "react";
 import ReactDOM from "react-dom/client"
-import Navbar from "./Navbar";
-import Body from "./Body";
-import Footer from "./Footer";
+import Navbar from "./src/components/Navbar";
+import Body from "./src/pages/Body";
+import Footer from "./src/components/Footer";
 import {createBrowserRouter, RouterProvider, Outlet } from "react-router-dom";
-import NotFound from "./NotFound";
-import About from "./About";
-import Cart from './Cart'
-import Menu from "./Menu";
-import {MenuProvider}from "./MenuContext";
-import { RestaurantProvider } from "./RestaurantContext";
-import Register from "./Register";
+import NotFound from "./src/pages/NotFound";
+import About from "./src/pages/About";
+import Cart from './src/pages/Cart'
+import Menu from "./src/pages/Menu";
+import {MenuProvider}from "./src/components/MenuContext";
+import { RestaurantProvider } from "./src/components/RestaurantContext";
+import Register from "./src/pages/Register";
 import { Provider } from "react-redux";
-import store from "./store";
+import store from "./src/components/store";
 
 const App = () =>{
    
